@@ -171,7 +171,11 @@ client.on("interactionCreate", async (interaction) => {
   if (commandName === "remove") {
     console.log("Removing old reminder...");
 
-    const messageId = interaction.options.getInteger("id") ?? 0;
+    const messageId = interaction.options.getInteger("id");
+    if (messageId > 5) {
+      await interaction.reply(`Only 5 reminders at most😈`);
+      return;
+    }
     reminder.removeMessage(messageId);
     // stop the cron task by messageId
     switch (messageId) {
