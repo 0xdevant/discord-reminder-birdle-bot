@@ -1,12 +1,20 @@
 {
   "compilerOptions": {
+    "target": "es6",
     "module": "commonjs",
-    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "noImplicitAny": false,
     "removeComments": true,
     "preserveConstEnums": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "dist",
+    "declaration": true
   },
-  "files": [
+  "include": [
     "index.ts"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }
