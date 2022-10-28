@@ -1,7 +1,7 @@
 // Require the necessary discord.js classes
 import { Client, GatewayIntentBits } from "discord.js";
 import * as dotenv from "dotenv";
-import cron from "node-cron";
+import * as cron from "node-cron";
 
 dotenv.config();
 
@@ -117,6 +117,8 @@ client.on("interactionCreate", async (interaction) => {
   const { commandName } = interaction;
 
   if (commandName === "remind") {
+    console.log("Setting up new reminder...");
+
     const message = interaction.options.getString("message");
     const interval = interaction.options.getString("interval");
     const time = interaction.options.getInteger("time");
@@ -162,9 +164,13 @@ client.on("interactionCreate", async (interaction) => {
         }
       }
     }
+
+    console.log("New reminder is set!");
   }
 
   if (commandName === "remove") {
+    console.log("Removing old reminder...");
+
     const messageId = interaction.options.getInteger("id") ?? 0;
     reminder.removeMessage(messageId);
     // stop the cron task by messageId
@@ -181,10 +187,13 @@ client.on("interactionCreate", async (interaction) => {
         task5.stop();
     }
 
-    await interaction.reply(`Message ${messageId} is removed😛`);
+    await interaction.reply(`Reminder ${messageId} is removed😛`);
+    console.log(`Reminder ${messageId} is removed!`);
   }
 
   if (commandName === "list") {
+    console.log("Showing all reminders...");
+
     const messages = reminder.getMessages();
 
     let allMessages = "";
@@ -203,6 +212,8 @@ client.on("interactionCreate", async (interaction) => {
   }
 
   if (commandName === "clear") {
+    console.log("Clearing all reminders...");
+
     task1.stop();
     task2.stop();
     task3.stop();
@@ -210,6 +221,8 @@ client.on("interactionCreate", async (interaction) => {
     task5.stop();
     reminder.clearMessages();
     await interaction.reply(`Clean now😎`);
+
+    console.log("All reminders cleared!");
   }
 });
 
