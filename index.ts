@@ -144,6 +144,8 @@ client.on("interactionCreate", async (interaction) => {
         }
       );
 
+      console.log(task);
+
       if (newMessage) {
         switch (newMessage.id) {
           case 1:
