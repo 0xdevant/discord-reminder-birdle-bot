@@ -76,12 +76,11 @@ class Reminder {
   removeMessage(id: number) {
     if (this.messages.length === 0) return;
 
-    this.messages.find((message) => {
-      if (message.id === id) {
-        this.messages.splice(this.messages.indexOf(message), 1);
-        // console.log(this.messages.indexOf(message));
-      }
-    });
+    this.messages.splice(
+      this.messages.findIndex((message) => message.id === id),
+      1
+    );
+    // console.log(this.messages.indexOf(message));
   }
 
   findMessage(id: number) {
